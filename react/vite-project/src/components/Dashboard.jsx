@@ -1,6 +1,14 @@
+import { useAuth0 } from "@auth0/auth0-react";
+
 function Dashboard() {
+  const { user, isAuthenticated } = useAuth0();
   return (
     <div style={{ maxWidth: "1000px", margin: "0 auto" }}>
+       { isAuthenticated && (
+        <div>
+<h5 className="mb-2"><strong>Welcome! {user.name}</strong></h5>
+<p className="text-muted">Web designer <span className="badge bg-primary">PRO</span></p>
+        </div>)}
       <form>
         <div style={{ padding: "20px" }} className="form-group row">
           <label className="col-sm-2 col-form-label col-form-label-lg">

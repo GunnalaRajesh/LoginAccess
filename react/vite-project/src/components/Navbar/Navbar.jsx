@@ -3,7 +3,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 function Navbar() {
   const { loginWithRedirect } = useAuth0();
   const {logout}=useAuth0();
-  const { isAuthenticated } = useAuth0();
+  const {user, isAuthenticated } = useAuth0();
 
   return (
     <div>
@@ -26,6 +26,14 @@ function Navbar() {
       <img src="./src/assets/Images/shiva.jpg" width="100" height="130" alt="" />
     </a>
     {
+      isAuthenticated && (
+        <div>
+           <img src={user.picture} className="rounded-circle mb-3" style={{width: "50px"}}
+  alt="Avatar" />
+        </div>
+      )
+    }
+    {
       isAuthenticated ? (
         <button  onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })} type="button" style={{ padding:"10px"}} className="btn btn-primary btn-lg">Logout</button>
       ):(
@@ -36,7 +44,6 @@ function Navbar() {
 </div>
   </div>
 </div>
-
   )
 }
 
